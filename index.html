@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفع ملف Excel وإضافة التقديرات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .success {
+            color: #28a745;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>رفع ملف Excel وإضافة التقديرات</h1>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        {% if success %}
+            <div class="success">تمت العملية بنجاح! <a href="{{ url_for('download_file', filename=file_path.split('/')[-1]) }}">تحميل الملف المعدل</a></div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">ملف Excel:</label>
+                <input type="file" id="file" name="file" accept=".xlsx,.xls" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_0">ملاحظة للمعدل أقل من 10:</label>
+                <input type="text" id="comment_0" name="comment_0" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_1">ملاحظة للمعدل من 10 إلى 11.99:</label>
+                <input type="text" id="comment_1" name="comment_1" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_2">ملاحظة للمعدل من 12 إلى 13.99:</label>
+                <input type="text" id="comment_2" name="comment_2" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_3">ملاحظة للمعدل من 14 إلى 15.99:</label>
+                <input type="text" id="comment_3" name="comment_3" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_4">ملاحظة للمعدل من 16 إلى 17.99:</label>
+                <input type="text" id="comment_4" name="comment_4" required>
+            </div>
+            <div class="form-group">
+                <label for="comment_5">ملاحظة للمعدل من 18 إلى 20:</label>
+                <input type="text" id="comment_5" name="comment_5" required>
+            </div>
+            <button type="submit">معالجة الملف</button>
+        </form>
+    </div>
+</body>
+</html>
